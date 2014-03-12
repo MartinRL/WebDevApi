@@ -8,24 +8,31 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebDevApi", "http://localho
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_53691"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\GitHub\WebDevApi\"
+		Debug.AspNetCompiler.PhysicalPath = "..\WebDevApi\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53691\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_53691"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\GitHub\WebDevApi\"
+		Release.AspNetCompiler.PhysicalPath = "..\WebDevApi\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53691\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\..\..\GitHub\WebDevApi\"
+		SlnRelativePath = "..\WebDevApi\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDevApi.Test", "WebDevApi.Test\WebDevApi.Test.csproj", "{DE35F01A-DF7D-4413-8C57-558A4A8BB6C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3A4D9B3D-1F26-42B6-B96C-831170A6B361}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
