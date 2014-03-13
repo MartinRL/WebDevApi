@@ -38,6 +38,12 @@ namespace WebDevApi.Domain
 
 		public void Update(string customer)
 		{
+			var existingCustomerAsJson = Json.Decode(this.customer);
+			var updatedCustomerAsJson = Json.Decode(customer);
+
+			if (updatedCustomerAsJson.customer.id != existingCustomerAsJson.customer.id)
+				throw new InvalidOperationException("Add new customer is unsupported.");
+
 			this.customer = customer;
 		}
 

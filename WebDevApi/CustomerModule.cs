@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Nancy;
 using Nancy.IO;
 using WebDevApi.Domain;
@@ -17,7 +18,14 @@ namespace WebDevApi
 
 			Put["/customers/{id}"] = _ =>
 			{
-				this.customerRepository.Update(Request.Body.ReadAsString());
+				try
+				{
+					this.customerRepository.Update(Request.Body.ReadAsString());
+				}
+				catch (InvalidOperationException e)
+				{
+					return HttpStatusCode.Forbidden;
+				}
 
 				return HttpStatusCode.OK;
 			};
