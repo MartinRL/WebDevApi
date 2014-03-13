@@ -1,41 +1,37 @@
-﻿using Nancy;
+﻿using System.IO;
+using Nancy;
+using Nancy.IO;
+using WebDevApi.Domain;
 
 namespace WebDevApi
 {
 	public class CustomerModule : NancyModule
 	{
-		public CustomerModule()
+		private readonly CustomerRepository customerRepository;
+
+		public CustomerModule(CustomerRepository customerRepository)
 		{
-			Get ["/customers/{id}"] = _ =>
-@"{
-	""customer"": {
-		""id"": 1,
-		""cpr"": 180173XXXX,
-		""secondaryPhoneNumber"": ""+46707318625"",
-		""name"": {
-			""first"": ""Martin"",
-			""last"": ""Rosén-Lidholm""
-		}
-		""email"": ""mrol@telenor.dk"",
-		""address"": {
-			""street"": ""Nils Anderssons gata"",
-			""houseNumber"": 12,
-			""postalCode"": 21836,
-			""city"": ""Bunkeflostrand"",
-			""country"": ""Sverige"",
-		}
-		""balance"": 322.50,
-		""electiveServices"": [
-			{ ""name"": ""5 GB data"" }, 
-			{ ""name"": ""Udlandsopkald"" },
-		]
-		""receivePromomotionsPermissions"": {
-			""sms"": false,
-			""email"": true,
-			""phoneCall"": false
+			this.customerRepository = customerRepository;
+
+			Get ["/customers/{id}"] = parameters => this.customerRepository.Get(parameters.id);
+
+			Put["/customers/{id}"] = _ =>
+			{
+				this.customerRepository.Update(Request.Body.ReadAsString());
+
+				return HttpStatusCode.OK;
+			};
 		}
 	}
-}";
+
+	public static class RequestBodyExtensions
+	{
+		public static string ReadAsString(this RequestStream @this)
+		{
+			using (var reader = new StreamReader(@this))
+			{
+				return reader.ReadToEnd();
+			}
 		}
 	}
 }
