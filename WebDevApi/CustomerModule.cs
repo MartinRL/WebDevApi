@@ -14,7 +14,7 @@ namespace WebDevApi
 		{
 			this.customerRepository = customerRepository;
 
-			Get ["/customers/{id}"] = parameters => this.customerRepository.Get(parameters.id);
+			Get["/customers/{id}"] = parameters => this.customerRepository.Get(parameters.id);
 
 			Put["/customers/{id}"] = _ =>
 			{
@@ -24,11 +24,18 @@ namespace WebDevApi
 				}
 				catch (InvalidOperationException e)
 				{
-					return HttpStatusCode.Forbidden;
+					var error = new ForbiddenError { Message = e.Message };
+
+					return Response.AsJson(error, HttpStatusCode.Forbidden);
 				}
 
 				return HttpStatusCode.OK;
 			};
+		}
+
+		public class ForbiddenError
+		{
+			public string Message { get; set; }
 		}
 	}
 

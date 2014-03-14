@@ -44,6 +44,9 @@ namespace WebDevApi.Domain
 			if (updatedCustomerAsJson.customer.id != existingCustomerAsJson.customer.id)
 				throw new InvalidOperationException("Add new customer is unsupported.");
 
+			if (updatedCustomerAsJson.customer.cpr != existingCustomerAsJson.customer.cpr)
+				throw new InvalidOperationException("Changing CPR is not allowed.");
+
 			this.customer = customer;
 		}
 
