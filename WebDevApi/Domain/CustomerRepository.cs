@@ -47,6 +47,9 @@ namespace WebDevApi.Domain
 			if (updatedCustomerAsJson.customer.cpr != existingCustomerAsJson.customer.cpr)
 				throw new InvalidOperationException("Changing CPR is not allowed.");
 
+			if (updatedCustomerAsJson.customer.balance != existingCustomerAsJson.customer.balance)
+				throw new InvalidOperationException("Changing balance is not allowed.");
+
 			this.customer = customer;
 		}
 
