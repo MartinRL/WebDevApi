@@ -161,6 +161,7 @@ namespace WebDevApi.Test
 }"));
 
 			response.StatusCode.Should().Be(HttpStatusCode.Forbidden);
+			response.Body.AsString().Should().Be(@"{""message"":""Add new customer is unsupported.""}");
 		}
 
 		[Fact]
