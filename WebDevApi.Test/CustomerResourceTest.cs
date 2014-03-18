@@ -203,5 +203,45 @@ namespace WebDevApi.Test
 			response.StatusCode.Should().Be(HttpStatusCode.Forbidden);
 			response.Body.AsString().Should().Be(@"{""message"":""Changing CPR is not allowed.""}");
 		}
+
+		[Fact]
+		public void update_balance_should_be_forbidden()
+		{
+			var browser = new Browser(new Bootstrapper());
+
+			var response = browser.Put("/customers/1", browserContext => browserContext.Body(
+@"{
+	""customer"": {
+		""id"": 1,
+		""cpr"": ""180173XXXX"",
+		""secondaryPhoneNumber"": ""+46707318625"",
+		""name"": {
+			""first"": ""Martin"",
+			""last"": ""Rosén-Lidholm""
+		},
+		""email"": ""mrl@mvno.dk"",
+		""address"": {
+			""street"": ""Nils Anderssons gata"",
+			""houseNumber"": 12,
+			""postalCode"": 21836,
+			""city"": ""Bunkeflostrand"",
+			""country"": ""Sverige""
+		},
+		""balance"": 1000,
+		""electiveServices"": [
+			{ ""name"": ""5 GB data"" }, 
+			{ ""name"": ""Udlandsopkald"" }
+		],
+		""receivePromomotionsPermissions"": {
+			""sms"": true,
+			""email"": true,
+			""phoneCall"": false
+		}
+	}
+}"));
+
+			response.StatusCode.Should().Be(HttpStatusCode.Forbidden);
+			response.Body.AsString().Should().Be(@"{""message"":""Changing balance is not allowed.""}");
+		}
 	}
 }
